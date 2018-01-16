@@ -10,11 +10,13 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import {LoginGuardGuard} from "../services/guards/login-guard.guard";
 
 const PAGES_ROUTES: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     component: PagesComponent,
+    canActivate: [ LoginGuardGuard ],
     children: [
       { path: 'dashboard', component: DashboardComponent, data: { titulo:'Dashboard', description:'Dashboard de la APP' } },
       { path: 'progress', component: ProgressComponent, data: { titulo:'ProgressBars' , description:'ProgressBars de la APP' } },
@@ -22,10 +24,10 @@ const PAGES_ROUTES: Routes = [
       { path: 'account-settings', component: AccountSettingComponent, data: { titulo:'Ajustes de Tema' , description:'Ajustes de Tema de la APP' }  },
       { path: 'promesas', component: PromesasComponent, data: { titulo:'Promesas' , description:'Promesas de la APP' }  },
       { path: 'rxjs', component: RxjsComponent, data: { titulo:'Rxjs Observables' , description:'Rxjs Observables de la APP' }  },
-      
+
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ]
-  }  
+  }
 ];
 
 export const PAGES_ROUTING: ModuleWithProviders = RouterModule.forChild(PAGES_ROUTES);
