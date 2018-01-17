@@ -11,6 +11,7 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import {LoginGuardGuard} from "../services/guards/login-guard.guard";
+import {ProfileComponent} from "./profile/profile.component";
 
 const PAGES_ROUTES: Routes = [
   {
@@ -22,6 +23,7 @@ const PAGES_ROUTES: Routes = [
       { path: 'progress', component: ProgressComponent, data: { titulo:'ProgressBars' , description:'ProgressBars de la APP' } },
       { path: 'graficas1', component: Graficas1Component, data: { titulo:'Graficas' , description:'Graficas de la APP' } },
       { path: 'account-settings', component: AccountSettingComponent, data: { titulo:'Ajustes de Tema' , description:'Ajustes de Tema de la APP' }  },
+      { path: 'perfil', component: ProfileComponent, data: { titulo:'Perfil', description:'Perfil del usuario de la APP' } },
       { path: 'promesas', component: PromesasComponent, data: { titulo:'Promesas' , description:'Promesas de la APP' }  },
       { path: 'rxjs', component: RxjsComponent, data: { titulo:'Rxjs Observables' , description:'Rxjs Observables de la APP' }  },
 

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from "../../models/usuario.model";
 import { HttpClient } from "@angular/common/http";
-import {URL_SERVICIOS} from "../../config/config";
+import { URL_SERVICIOS } from "../../config/config";
 import 'rxjs/add/operator/map';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
 
 @Injectable()
 export class UsuarioService {
@@ -11,7 +12,7 @@ export class UsuarioService {
   usuario:Usuario;
   token:string;
 
-  constructor(public http:HttpClient, public router:Router) {
+  constructor(public http:HttpClient, public router:Router, public subirArchivoService:SubirArchivoService) {
     console.log("Servicio de usuarios");
     this.cargarStorage();
   }
@@ -84,6 +85,37 @@ export class UsuarioService {
       .map( (resp:any) => {
         return resp.usuario;
       });
+  }
+
+  actualizarUsuario(usuario:Usuario){
+    let url:string = URL_SERVICIOS + '/usuario/' + usuario._id;
+    url +='?token='+this.token;
+
+    return this.http.put(url,usuario)
+      .map( (resp:any) => {
+
+        // La respuesta del backend me devuelve el usuario actualizado
+        let usuarioDB:Usuario = usuario;
+        this.saveLocalStorage(usuarioDB._id,this.token,usuarioDB);
+        return resp;
+      });
+  }
+
+  cambiarImagen(file:File, id:string){
+    return new Promise( ( resolve, reject ) =>{
+      this.subirArchivoService.subirArchivo(file, 'usuarios', id)
+        .then( (resp:any) =>{
+          //actualizo la imagen del usuario logueado
+          this.usuario.img = resp.usuario.img;
+          // Actualizo datos del usuario en storage (para que se vean los cambios en front)
+          this.saveLocalStorage(id, this.token, this.usuario);
+          console.log(resp);
+          resolve(resp)
+        }).catch( (resp:any) => {
+          reject(resp);
+          console.log("Error subiendo archivo ", resp);
+      });
+    });
   }
 
 }
