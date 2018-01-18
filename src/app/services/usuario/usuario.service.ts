@@ -13,7 +13,7 @@ export class UsuarioService {
   token:string;
 
   constructor(public http:HttpClient, public router:Router, public subirArchivoService:SubirArchivoService) {
-    console.log("Servicio de usuarios");
+    //console.log("Servicio de usuarios");
     this.cargarStorage();
   }
 
@@ -94,9 +94,12 @@ export class UsuarioService {
     return this.http.put(url,usuario)
       .map( (resp:any) => {
 
-        // La respuesta del backend me devuelve el usuario actualizado
-        let usuarioDB:Usuario = usuario;
-        this.saveLocalStorage(usuarioDB._id,this.token,usuarioDB);
+        if( usuario._id === this.usuario._id)
+        {// SI el usuario es el mismo logueado actualizo las variables de storage
+          let usuarioDB:Usuario = usuario;// La respuesta del backend me devuelve el usuario actualizado
+          this.saveLocalStorage(usuarioDB._id,this.token,usuarioDB);
+        }
+
         return resp;
       });
   }
@@ -116,6 +119,26 @@ export class UsuarioService {
           console.log("Error subiendo archivo ", resp);
       });
     });
+  }
+
+  findAllUsuarios(desde:number=0)
+  {
+    let url = URL_SERVICIOS + '/usuario?desde=' + desde;
+    return this.http.get(url);
+  }
+
+  findUsuarios(termino:string)
+  {
+    let url = URL_SERVICIOS + '/busqueda/colleccion/usuarios/' + termino;
+    return this.http.get(url);
+  }
+
+  borrarUsuario(id:string)
+  {
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    url +='?token='+this.token;
+
+    return this.http.delete(url);
   }
 
 }

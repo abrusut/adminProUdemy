@@ -12,14 +12,14 @@ export class BreadcrumsComponent implements OnInit {
   label:string = '';
   descripcion:string = '';
 
-  constructor( private router: Router, 
+  constructor( private router: Router,
                private title: Title,
-               private meta: Meta) { 
+               private meta: Meta) {
 
     this.getDataRoute()
       .subscribe(data => {
-          console.log(data);
-          
+          //console.log(data);
+
           this.label = data.titulo;
           this.descripcion = data.descripcion;
           this.title.setTitle( this.label );
@@ -45,10 +45,10 @@ export class BreadcrumsComponent implements OnInit {
  */
   getDataRoute(){
     return this.router.events
-      .filter( evento => evento instanceof ActivationEnd )  
-      .filter( (evento: ActivationEnd) => evento.snapshot.firstChild === null)  
+      .filter( evento => evento instanceof ActivationEnd )
+      .filter( (evento: ActivationEnd) => evento.snapshot.firstChild === null)
       .map( (evento: ActivationEnd) => {
-        return evento.snapshot.data       
+        return evento.snapshot.data
       });
   }
 
