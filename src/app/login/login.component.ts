@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   email:string='';
   recuerdame:boolean = false;
   auth2:any;
+  error:any = null;
 
   constructor(public router: Router,
               public usuarioService:UsuarioService) { }
@@ -80,6 +81,12 @@ export class LoginComponent implements OnInit {
         console.log(loginCorrecto);
         this.router.navigate(['/dashboard']);
 
-      });
+      },
+        error => {
+          this.error = error.error;
+          console.log(this.error.mensaje);
+          console.log("ERRORRR"+error); // error path
+        }
+      );
   }
 }

@@ -13,6 +13,15 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import {LoginGuardGuard} from "../services/guards/login-guard.guard";
 import {ProfileComponent} from "./profile/profile.component";
 import {UsuariosComponent} from "./usuarios/usuarios.component";
+import {HospitalesComponent} from "./hospitales/hospitales.component";
+import {MedicosComponent} from "./medicos/medicos.component";
+import {MedicoComponent} from "./medicos/medico.component";
+
+
+/**
+ *   La "data" de cada ruta se usa para agregar meta tags dinamicamente y setear el titulo de la pagina en la que estoy
+ *   Esto se usa en BreadcrumsComponent
+  */
 
 const PAGES_ROUTES: Routes = [
   {
@@ -30,6 +39,9 @@ const PAGES_ROUTES: Routes = [
 
       //Mantenimientos
       { path: 'usuarios', component: UsuariosComponent, data: { titulo:'Usuarios', description:'Mantenimiento de usuarios de la APP' } },
+      { path: 'hospitales', component: HospitalesComponent, data: { titulo:'Hospitales', description:'Mantenimiento de hospitales de la APP' } },
+      { path: 'medicos', component: MedicosComponent, data: { titulo:'Medicos', description:'Mantenimiento de medicos de la APP' } },
+      { path: 'medico/:id', component: MedicoComponent, data: { titulo:'Actualizar Medico', description:'Mantenimiento de un Medico de la APP' } },
 
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ]
