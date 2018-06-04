@@ -6,6 +6,7 @@ import { Usuario } from "../models/usuario.model";
 
 declare function init_plugins();
 declare const gapi:any;
+declare var swal:any;
 
 @Component({
   selector: 'app-login',
@@ -84,6 +85,7 @@ export class LoginComponent implements OnInit {
       },
         error => {
           this.error = error.error;
+          swal('Error en el Login', this.error.mensaje, 'error');
           console.log(this.error.mensaje);
           console.log("ERRORRR"+error); // error path
         }

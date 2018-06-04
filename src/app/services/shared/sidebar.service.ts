@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
+import {UsuarioService} from "../usuario/usuario.service";
 
 @Injectable()
 export class SidebarService {
 
+  menu:any = [];
+
+  /**
+   *  se traslada logica el backend login.js
+   *
   menu: any[] = [
     {
       titulo: 'Principal',
@@ -26,6 +32,14 @@ export class SidebarService {
       ]
     }
   ];
-  constructor() { }
 
+   **/
+
+  constructor( public usuarioService:UsuarioService) {
+
+  }
+
+  cargarMenu(){
+    this.menu = this.usuarioService.menu;
+  }
 }

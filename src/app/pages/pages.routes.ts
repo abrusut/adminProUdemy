@@ -11,11 +11,13 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import {LoginGuardGuard} from "../services/guards/login-guard.guard";
+import {AdminGuard} from "../services/guards/admin.guard";
 import {ProfileComponent} from "./profile/profile.component";
 import {UsuariosComponent} from "./usuarios/usuarios.component";
 import {HospitalesComponent} from "./hospitales/hospitales.component";
 import {MedicosComponent} from "./medicos/medicos.component";
 import {MedicoComponent} from "./medicos/medico.component";
+import {BusquedaComponent} from "./busqueda/busqueda.component";
 
 
 /**
@@ -37,8 +39,17 @@ const PAGES_ROUTES: Routes = [
       { path: 'promesas', component: PromesasComponent, data: { titulo:'Promesas' , description:'Promesas de la APP' }  },
       { path: 'rxjs', component: RxjsComponent, data: { titulo:'Rxjs Observables' , description:'Rxjs Observables de la APP' }  },
 
+      //Busqueda General Superior
+      { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo:'Busqueda', description:'Busqueda General Superior' } },
+
       //Mantenimientos
-      { path: 'usuarios', component: UsuariosComponent, data: { titulo:'Usuarios', description:'Mantenimiento de usuarios de la APP' } },
+      { path: 'usuarios',
+        component: UsuariosComponent,
+        data: { titulo:'Usuarios',
+                description:'Mantenimiento de usuarios de la APP' }
+        canActivate:[ AdminGuard ]
+
+      },
       { path: 'hospitales', component: HospitalesComponent, data: { titulo:'Hospitales', description:'Mantenimiento de hospitales de la APP' } },
       { path: 'medicos', component: MedicosComponent, data: { titulo:'Medicos', description:'Mantenimiento de medicos de la APP' } },
       { path: 'medico/:id', component: MedicoComponent, data: { titulo:'Actualizar Medico', description:'Mantenimiento de un Medico de la APP' } },
