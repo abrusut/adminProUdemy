@@ -18,6 +18,8 @@ import { ServiceModule } from './services/service.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
+import {PagesComponent} from "./pages/pages.component";
+import {SharedModule} from "./shared/shared.modulo";
 
 
 
@@ -25,7 +27,8 @@ import { RegisterComponent } from './login/register.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PagesComponent
   ],
   imports: [
     APP_ROUTING,
@@ -33,8 +36,8 @@ import { RegisterComponent } from './login/register.component';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    PageModule,
-    ServiceModule
+    ServiceModule,
+    SharedModule
   ],
   providers: [
     /**{

@@ -13,6 +13,7 @@ import {UsuarioService} from "../services/usuario/usuario.service";
 import {HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

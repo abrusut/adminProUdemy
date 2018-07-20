@@ -3,7 +3,7 @@ import {Hospital} from "../../models/hospital.model";
 import {HospitalService} from "../../services/hospital/hospital.service";
 import {ModalUploadService} from "../../components/modal-upload/modal-upload.service";
 import {Router} from "@angular/router";
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-hospitales',
   templateUrl: './hospitales.component.html',

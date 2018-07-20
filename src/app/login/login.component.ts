@@ -6,7 +6,7 @@ import { Usuario } from "../models/usuario.model";
 
 declare function init_plugins();
 declare const gapi:any;
-declare var swal:any;
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-login',

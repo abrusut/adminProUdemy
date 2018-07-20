@@ -18,6 +18,7 @@ import {HospitalesComponent} from "./hospitales/hospitales.component";
 import {MedicosComponent} from "./medicos/medicos.component";
 import {MedicoComponent} from "./medicos/medico.component";
 import {BusquedaComponent} from "./busqueda/busqueda.component";
+import {VerificaTokenGuard} from "../services/guards/verifica-token.guard";
 
 
 /**
@@ -26,12 +27,12 @@ import {BusquedaComponent} from "./busqueda/busqueda.component";
   */
 
 const PAGES_ROUTES: Routes = [
-  {
-    path: '',
-    component: PagesComponent,
-    canActivate: [ LoginGuardGuard ],
-    children: [
-      { path: 'dashboard', component: DashboardComponent, data: { titulo:'Dashboard', description:'Dashboard de la APP' } },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: { titulo:'Dashboard', description:'Dashboard de la APP' },
+        canActivate:[ VerificaTokenGuard ]
+      },
       { path: 'progress', component: ProgressComponent, data: { titulo:'ProgressBars' , description:'ProgressBars de la APP' } },
       { path: 'graficas1', component: Graficas1Component, data: { titulo:'Graficas' , description:'Graficas de la APP' } },
       { path: 'account-settings', component: AccountSettingComponent, data: { titulo:'Ajustes de Tema' , description:'Ajustes de Tema de la APP' }  },
@@ -46,7 +47,7 @@ const PAGES_ROUTES: Routes = [
       { path: 'usuarios',
         component: UsuariosComponent,
         data: { titulo:'Usuarios',
-                description:'Mantenimiento de usuarios de la APP' }
+                description:'Mantenimiento de usuarios de la APP' },
         canActivate:[ AdminGuard ]
 
       },
@@ -55,9 +56,7 @@ const PAGES_ROUTES: Routes = [
       { path: 'medico/:id', component: MedicoComponent, data: { titulo:'Actualizar Medico', description:'Mantenimiento de un Medico de la APP' } },
 
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
-    ]
-  }
-];
+  ];
 
 export const PAGES_ROUTING: ModuleWithProviders = RouterModule.forChild(PAGES_ROUTES);
 

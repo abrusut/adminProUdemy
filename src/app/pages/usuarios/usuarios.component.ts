@@ -3,7 +3,7 @@ import {Usuario} from "../../models/usuario.model";
 import {UsuarioService} from "../../services/usuario/usuario.service";
 import {ModalUploadService} from "../../components/modal-upload/modal-upload.service";
 
-declare var swal:any;
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-usuarios',
@@ -91,7 +91,7 @@ export class UsuariosComponent implements OnInit {
       title: "¿Esta Seguro?",
       text: "Esta apunto de borrar a "+usuario.nombre,
       icon: "warning",
-      buttons: true,
+      buttons: [true],
       dangerMode: true,
     })
       .then( borrar => {
